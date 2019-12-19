@@ -271,6 +271,7 @@ ServiceFabricBackup/
 # Microsoft Fakes
 FakesAssemblies/
 
+*/tmp/build_b0c5c9f7e71eb222674203a72409ea1c/*.csproj
 # GhostDoc plugin setting file
 *.GhostDoc.xml
 
