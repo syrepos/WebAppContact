@@ -6,6 +6,7 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ContactWebApp.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace ContactWebApp
 {
@@ -19,6 +20,7 @@ namespace ContactWebApp
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
 
+            createRolesAndUsers();
             // Autoriser l’application à utiliser un cookie pour stocker des informations pour l’utilisateur connecté
             // et pour utiliser un cookie à des fins de stockage temporaire des informations sur la connexion utilisateur avec un fournisseur de connexion tiers
             // Configurer le cookie de connexion
@@ -63,6 +65,45 @@ namespace ContactWebApp
             //    ClientId = "",
             //    ClientSecret = ""
             //});
+        
+       
+
+
         }
+        private void createRolesAndUsers()
+        {
+            ApplicationDbContext context = new ApplicationDbContext();
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context) );
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            if(!roleManager.RoleExists("Admin"))
+            {
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                roleManager.Create(role);
+
+                var user = new ApplicationUser();
+                user.UserName = "super.admin";
+                
+                user.Email = "syrineadmin@gmail.com";
+                var userPWD = "Fascinating_";
+                var chkuser = userManager.Create(user, userPWD);
+
+                if (!chkuser.Succeeded) throw new Exception("Couldn't create the super admin");
+                    var result = userManager.AddToRole(user.Id, "Admin");
+                
+
+
+
+            }
+        }
+
+
+
+
+
+
+
+
+
     }
 }
