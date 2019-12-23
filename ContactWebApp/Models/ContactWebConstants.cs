@@ -17,7 +17,7 @@ namespace ContactWebApp.Models
         public const int MAX_STREETADRESS_LENGTH = 250;
         public const int MAX_CITY_LENGTH = 50; 
         public const int MAX_ZIPCODE_LENGTH = 10;
-        public const int MIN_ZIPCODE_LENGTH = 10;
+        public const int MIN_ZIPCODE_LENGTH = 4;
   
 
 
