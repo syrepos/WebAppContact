@@ -49,7 +49,7 @@ namespace ContactWebApp.Controllers
         {
             _userId = GetCurrentUserId();
             ViewBag.StateId = new SelectList(db.States, "Id", "Name");
-            ViewBag.UserId = _userId;
+        //    ViewBag.UserId = _userId;
             return View();
         }
 
@@ -73,7 +73,8 @@ namespace ContactWebApp.Controllers
             }
 
             ViewBag.StateId = new SelectList(db.States, "Id", "Name", contact.StateId);
-            ViewBag.UserId = _userId;
+           //We don't need to pass the user ID in here.
+            // ViewBag.UserId = _userId;
             return View(contact);
         }
 
@@ -92,7 +93,7 @@ namespace ContactWebApp.Controllers
                 return HttpNotFound();
             }
             ViewBag.StateId = new SelectList(db.States, "Id", "Name", contact.StateId);
-            ViewBag.UserId = _userId;
+       //     ViewBag.UserId = _userId;
             return View(contact);
         }
 
@@ -104,7 +105,9 @@ namespace ContactWebApp.Controllers
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,PhonePrimary,PhoneSecondary,Birthday,StreetAdress1,StreetAdress2,City,StateId,Zip,UserId")] Contact contact)
         {
             _userId = GetCurrentUserId();
-
+            contact.UserId = _userId;
+            ModelState.Clear();
+            TryValidateModel(contact);
             if (ModelState.IsValid)
             {
                 db.Entry(contact).State = EntityState.Modified;
