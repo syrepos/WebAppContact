@@ -13,7 +13,7 @@
     <header>
 
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light">
-            <div class="container">
+            <div class="container-fluid">
                 @Html.ActionLink("Contact Web 2019", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
 
@@ -23,24 +23,40 @@
                 <div class="collapse navbar-collapse d-sm-inline-flex flex-sm-row-reverse">
                     @Html.Partial("_loginPartial")
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item active">
-                            @Html.ActionLink("Accueil", "Index", "Home", new { area = "" }, new { @class ="nav-link text-dark" })
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"
+                            && ViewContext.RouteData.Values["Controller"].ToString() =="Home"
+                            ? "nav-item active" : "nav-item")">
+                            @Html.ActionLink("Accueil", "Index", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
-                        <li class="nav-item active">
-                            @Html.ActionLink("À propos de", "About", "Home", new { area = "" }, new { @class ="nav-link text-dark" })
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString()=="About" ? "nav-item active" : "nav-item")">
+                            @Html.ActionLink("À propos de", "About", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
-                        <li class="nav-item active">
-                            @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class ="nav-link text-dark" })
+                        <li class="@(ViewContext.RouteData.Values["Action"].ToString()=="Contact" ? "nav-item active" : "nav-item")">
+                            @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
 
-                    </ul>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li class="@(ViewContext.RouteData.Values["Controller"].ToString()=="States" ? "nav-item active" : "nav-item")">
+                                @Html.ActionLink("States", "Index", "States", new { area = "" }, new { @class = "nav-link text-dark" })
+                            </li>
+                        }
+
+                        @if (User.Identity.Name.ToString().Length > 0)
+                        {
+
+                            <li class="@(ViewContext.RouteData.Values["Controller"].ToString() == "Contacts" ? "nav-item active" : "nav-item")">
+                                @Html.ActionLink("My Contacts", "Index", "Contacts", new { area = "" }, new { @class = "nav-link text-dark" })
+                            </li>
+                        }
+                        </ul>
                 </div>
 
             </div>
         </nav>
     </header>
 
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="p-3">
             @RenderBody()
         </main>
@@ -50,7 +66,7 @@
     </div>
 
     <footer>
-        <div class="container">&copy; @DateTime.Now.Year - Mon application ASP.NET</div>
+        <div class="container">&copy; @DateTime.Now.Year - Contacts Application</div>
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
