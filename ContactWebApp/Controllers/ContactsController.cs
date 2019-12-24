@@ -25,7 +25,9 @@ namespace ContactWebApp.Controllers
         public ActionResult Index()
         {
             _userId = GetCurrentUserId();
-            var contacts = db.Contacts.Include(c => c.State).Include(c => c.User);
+            var contacts = db.Contacts.Include(c => c.State)
+                                    .Include(c => c.User)
+                                    .Where(x=>x.UserId == _userId);
             return View(contacts.ToList());
         }
 
@@ -36,7 +38,7 @@ namespace ContactWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == _userId);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -87,7 +89,7 @@ namespace ContactWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == _userId);
             if (contact == null)
             {
                 return HttpNotFound();
@@ -105,6 +107,8 @@ namespace ContactWebApp.Controllers
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,PhonePrimary,PhoneSecondary,Birthday,StreetAdress1,StreetAdress2,City,StateId,Zip,UserId")] Contact contact)
         {
             _userId = GetCurrentUserId();
+            var existing = db.Contacts.FirstOrDefault(x => x.Id == contact.Id && x.UserId == _userId);
+            if (existing == null) return HttpNotFound();
             contact.UserId = _userId;
             ModelState.Clear();
             TryValidateModel(contact);
@@ -126,12 +130,12 @@ namespace ContactWebApp.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Contact contact = db.Contacts.Find(id);
-            if (contact == null)
+            var existing = db.Contacts.FirstOrDefault(x => x.Id == id && x.UserId == _userId);
+            if (existing == null)
             {
                 return HttpNotFound();
             }
-            return View(contact);
+            return View(existing);
         }
 
         // POST: Contacts/Delete/5
@@ -139,7 +143,7 @@ namespace ContactWebApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Contact contact = db.Contacts.Find(id);
+            Contact contact = db.Contacts.FirstOrDefault(x=>x.Id ==id && x.UserId == _userId);
             db.Contacts.Remove(contact);
             db.SaveChanges();
             return RedirectToAction("Index");
