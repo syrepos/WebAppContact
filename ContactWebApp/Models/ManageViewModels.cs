@@ -28,7 +28,7 @@ namespace ContactWebApp.Models
     public class SetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessage = "Le {0} doit compter au moins {2} caractères.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The string {0} needs to contain at least {2} characters", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New Password")]
         public string NewPassword { get; set; }
@@ -47,7 +47,7 @@ namespace ContactWebApp.Models
         public string OldPassword { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "Le {0} doit compter au moins {2} caractères.", MinimumLength = 6)]
+        [StringLength(100, ErrorMessage = "The string {0} needs to contain at least {2} characters", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "New password")]
         public string NewPassword { get; set; }
