@@ -107,7 +107,7 @@ namespace ContactWebApp.Controllers
         public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Email,PhonePrimary,PhoneSecondary,Birthday,StreetAdress1,StreetAdress2,City,StateId,Zip,UserId")] Contact contact)
         {
             _userId = GetCurrentUserId();
-            var existing = db.Contacts.FirstOrDefault(x => x.Id == contact.Id && x.UserId == _userId);
+            var existing = db.Contacts.AsNoTracking().FirstOrDefault(x => x.Id == contact.Id && x.UserId == _userId);
             if (existing == null) return HttpNotFound();
             contact.UserId = _userId;
             ModelState.Clear();
