@@ -86,7 +86,7 @@ namespace ContactWebApp.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Tentative de connexion non valide.");
+                    ModelState.AddModelError("", "Invalid connection request.");
                     return View(model);
             }
         }

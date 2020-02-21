@@ -35,7 +35,7 @@ namespace ContactWebApp.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm new password")]
-        [Compare("NewPassword", ErrorMessage = "New password and the old password aren't similar.")]
+        [Compare("NewPassword", ErrorMessage = "Passwords aren't similar.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -54,7 +54,7 @@ namespace ContactWebApp.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("NewPassword", ErrorMessage = "New password and the old password aren't similar.")]
+        [Compare("NewPassword", ErrorMessage = "Passwords aren't similar.")]
         public string ConfirmPassword { get; set; }
     }
 

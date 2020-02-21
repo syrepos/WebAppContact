@@ -58,7 +58,7 @@ namespace ContactWebApp.Models
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember Paswword ?")]
+        [Display(Name = "Remember Password ?")]
         public bool RememberMe { get; set; }
     }
 
@@ -77,7 +77,7 @@ namespace ContactWebApp.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password ")]
-        [Compare("Password", ErrorMessage = "New password and the old password aren't similar.")]
+        [Compare("Password", ErrorMessage = "Passwords aren't similar.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -91,12 +91,12 @@ namespace ContactWebApp.Models
         [Required]
         [StringLength(100, ErrorMessage = "the string {0} needs to contain at least {2} characters.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Passworde")]
+        [Display(Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "New password and the old password aren't similar.")]
+        [Compare("Password", ErrorMessage = "Passwords aren't similar.")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -106,7 +106,7 @@ namespace ContactWebApp.Models
     {
         [Required]
         [EmailAddress]
-        [Display(Name = "E-mail")]
+        [Display(Name = "Email")]
         public string Email { get; set; }
     }
 }
