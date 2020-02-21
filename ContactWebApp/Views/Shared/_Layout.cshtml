@@ -26,10 +26,10 @@
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString()=="Index"
                             && ViewContext.RouteData.Values["Controller"].ToString() =="Home"
                             ? "nav-item active" : "nav-item")">
-                            @Html.ActionLink("Accueil", "Index", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString()=="About" ? "nav-item active" : "nav-item")">
-                            @Html.ActionLink("À propos de", "About", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
+                            @Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link text-dark" })
                         </li>
                         <li class="@(ViewContext.RouteData.Values["Action"].ToString()=="Contact" ? "nav-item active" : "nav-item")">
                             @Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link text-dark" })

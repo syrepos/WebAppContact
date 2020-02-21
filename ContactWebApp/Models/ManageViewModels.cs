@@ -30,12 +30,12 @@ namespace ContactWebApp.Models
         [Required]
         [StringLength(100, ErrorMessage = "Le {0} doit compter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nouveau mot de passe")]
+        [Display(Name = "New Password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le nouveau mot de passe")]
-        [Compare("NewPassword", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [Display(Name = "Confirme new password")]
+        [Compare("NewPassword", ErrorMessage = "New password and the old password aren't similar.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -43,18 +43,18 @@ namespace ContactWebApp.Models
     {
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Mot de passe actuel")]
+        [Display(Name = "Old password")]
         public string OldPassword { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "Le {0} doit compter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Nouveau mot de passe")]
+        [Display(Name = "New password")]
         public string NewPassword { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirmer le nouveau mot de passe")]
-        [Compare("NewPassword", ErrorMessage = "Le nouveau mot de passe et le mot de passe de confirmation ne correspondent pas.")]
+        [Display(Name = "Confirm password")]
+        [Compare("NewPassword", ErrorMessage = "New password and the old password aren't similar.")]
         public string ConfirmPassword { get; set; }
     }
 
@@ -62,7 +62,7 @@ namespace ContactWebApp.Models
     {
         [Required]
         [Phone]
-        [Display(Name = "Numéro de téléphone")]
+        [Display(Name = "Phone number")]
         public string Number { get; set; }
     }
 
@@ -74,7 +74,7 @@ namespace ContactWebApp.Models
 
         [Required]
         [Phone]
-        [Display(Name = "Numéro de téléphone")]
+        [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
     }
 
